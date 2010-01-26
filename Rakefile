@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "fastory"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Make FactoryGirl faster by caching SQL on frequently used factories}
+    gem.description = %Q{Sits on top of FactoryGirl and, when appropriate, caches SQL for later playback}
     gem.email = "ryan@angilly.com"
     gem.homepage = "http://github.com/ryana/fastory"
     gem.authors = ["Ryan Angilly"]
