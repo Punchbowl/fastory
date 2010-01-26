@@ -121,6 +121,8 @@ ActiveRecord::Base.connection.class_eval do
   alias_method_chain :execute, :query_capture
 end
 
+ActiveSupport::TestCase.send :include, Punchbowl::InstanceMethods
+
 def Fastory(name, options = {})
   Punchbowl::Fastory.new(name, options)
 end
