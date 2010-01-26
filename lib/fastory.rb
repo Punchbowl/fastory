@@ -1,3 +1,6 @@
+require 'active_support'
+require 'active_record'
+
 module Punchbowl
   module InstanceMethods
     def self.included(receiver)
@@ -19,9 +22,9 @@ module Punchbowl
   end
 
   class Fastory
-    attr_accessor :name, :options
-    
+    attr_accessor :name, :options    
     cattr_accessor :fastories, :sql_inserts, :record_sql
+    
     @@fastories = {}
     @@sql_inserts = []
     @@record_sql = false
@@ -46,7 +49,7 @@ module Punchbowl
         @@sql_inserts = []
         @@record_sql = true
         obj = fg.build name, options
-        obj.id = fg.next(:integer) if obj.id.blank? 
+        obj.id = fg.next(:fastory_id_generator) if obj.id.blank? 
         obj.save!
         @@record_sql = false
 
@@ -124,7 +127,11 @@ ActiveRecord::Base.connection.class_eval do
   alias_method_chain :execute, :query_capture
 end
 
-ActiveSupport::TestCase.send :include, Punchbowl::InstanceMethods
+if defined?(ActiveSupport) && defined?(ActiveSupport::TestCase)
+  ActiveSupport::TestCase.send :include, Punchbowl::InstanceMethods
+end
+
+Factory.sequence(:fastory_id_generator) {|n| n.to_i}
 
 def Fastory(name, options = {})
   Punchbowl::Fastory.new(name, options).process!
