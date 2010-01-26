@@ -74,7 +74,7 @@ module Punchbowl
         end
 
         raise 'Cannot deal with new records either... sorry' if v.new_record?
-        assoc = build_class_for(name).reflect_on_all_associations.find {|a| a.name.to_s == k.to_s }
+        assoc = build_class.reflect_on_all_associations.find {|a| a.name.to_s == k.to_s }
         raise "No association #{name} on #{k}" if assoc.blank?
         raise 'Can only deal with belongs_to right now' unless assoc.belongs_to?
 
