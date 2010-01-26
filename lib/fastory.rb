@@ -35,19 +35,19 @@ module Punchbowl
     def process 
       options = transform_associations
 
-      if template_available?(cache_key)
+      if template_available?
         cache = @@fastories[cache_key]
         cnt = cache[:templates_used] ||= 0
         cache[:templates_used] += 1
 
         fast_gen(cache[:templates][cnt][:sql])
 
-        obj = build_class_for(name).find cache[:templates][cnt][:id]
+        obj = build_class.find cache[:templates][cnt][:id]
       else
         @@sql_inserts = []
         @@record_sql = true
-        obj = Factory.build name, options
-        obj.id = Factory.next(:integer) if obj.id.blank? 
+        obj = fg.build name, options
+        obj.id = fg.next(:integer) if obj.id.blank? 
         obj.save!
         @@record_sql = false
 
@@ -85,12 +85,16 @@ module Punchbowl
       output_options
     end
 
-    def build_class_for
-      Factory.factories[name].build_class
+    def build_class
+      fg.factories[name].build_class
     end
 
     def template_available?
       @@fastories[cache_key].present? && (@@fastories[cache_key][:templates_available].to_i > @@fastories[cache_key][:templates_used].to_i)
+    end
+
+    def fg
+      ::Factory
     end
 
     def fast_gen(sql)
@@ -111,7 +115,7 @@ ActiveRecord::Base.connection.class_eval do
     if Punchbowl::Fastory.record_sql
       case sql
       when /\A(DELETE|UPDATE|INSERT)/
-        Punchbowl::Factory.sql_inserts << sql
+        Punchbowl::Fastory.sql_inserts << sql
       end
     end
 
