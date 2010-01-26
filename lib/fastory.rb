@@ -29,10 +29,9 @@ module Punchbowl
     def initialize(name, options = {})
       self.name = name
       self.options = options
-      process
     end
 
-    def process 
+    def process! 
       options = transform_associations
 
       if template_available?
@@ -128,6 +127,6 @@ end
 ActiveSupport::TestCase.send :include, Punchbowl::InstanceMethods
 
 def Fastory(name, options = {})
-  Punchbowl::Fastory.new(name, options)
+  Punchbowl::Fastory.new(name, options).process!
 end
 
