@@ -8,7 +8,7 @@ begin
     gem.summary = %Q{Make FactoryGirl faster by caching SQL on frequently used factories}
     gem.description = %Q{Sits on top of FactoryGirl and, when appropriate, caches SQL for later playback}
     gem.email = "ryan@angilly.com"
-    gem.homepage = "http://github.com/ryana/fastory"
+    gem.homepage = "http://github.com/mypunchbowl/fastory"
     gem.authors = ["Ryan Angilly"]
     gem.add_development_dependency "thoughtbot-shoulda"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
