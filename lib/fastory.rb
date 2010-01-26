@@ -97,7 +97,7 @@ module Punchbowl
       sql.each {|s| ActiveRecord::Base.connection.execute_without_query_capture(s) }
     end
 
-    def cache_key(name, options)
+    def cache_key
       options.to_a.map {|a,b| [a.to_s, b.to_s]}.sort {|a,b| a[0] <=> b[0]}.unshift([:name, name])
     end
   end
