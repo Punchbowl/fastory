@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "fastory.gemspec",
      "lib/fastory.rb",
      "test/fastory_test.rb",
+     "test/test.db",
      "test/test_helper.rb"
   ]
   s.homepage = %q{http://github.com/mypunchbowl/fastory}
@@ -44,11 +45,20 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 2.3.5"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 2.3.5"])
+      s.add_runtime_dependency(%q<factory_girl>, [">= 1.2.3"])
     else
       s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_dependency(%q<activesupport>, [">= 2.3.5"])
+      s.add_dependency(%q<activerecord>, [">= 2.3.5"])
+      s.add_dependency(%q<factory_girl>, [">= 1.2.3"])
     end
   else
     s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+    s.add_dependency(%q<activesupport>, [">= 2.3.5"])
+    s.add_dependency(%q<activerecord>, [">= 2.3.5"])
+    s.add_dependency(%q<factory_girl>, [">= 1.2.3"])
   end
 end
 
