@@ -15,4 +15,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2010 Ryan Angilly. See LICENSE for details.
+Copyright (c) 2010 Punchbowl Software. See LICENSE for details.
